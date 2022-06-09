@@ -58,7 +58,7 @@ function RelationshipGraph({ fruits, fruitConnections }) {
       graph={graph}
       options={options}
       events={events}
-      style={{ height: "400px" }}
+      style={{ height: "600px", backgroundColor: "rgb(248, 249, 250)" }}
     />
   );
 }
