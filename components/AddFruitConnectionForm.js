@@ -73,14 +73,12 @@ function AddFruitConnectionForm({
         <div className="row">
           <div className="col-6">
             <div className="mb-3">
-              <label htmlFor="fruit1" className="form-label">
-                Fruit 1
-              </label>
               <input
                 type="text"
                 list="fruit1Options"
                 className="form-control"
                 id="fruit1"
+                placeholder="Enter fruit name"
                 onKeyPress={(event) => {
                   if (event.key === "Enter") {
                     addFruitConnection().then((_) => {});
@@ -96,14 +94,12 @@ function AddFruitConnectionForm({
           </div>
           <div className="col-6">
             <div className="mb-3">
-              <label htmlFor="fruit2" className="form-label">
-                Fruit 2
-              </label>
               <input
                 type="text"
                 list="fruit2Options"
                 className="form-control"
                 id="fruit2"
+                placeholder="Enter fruit name"
                 onKeyPress={(event) => {
                   if (event.key === "Enter") {
                     addFruitConnection().then((_) => {});
