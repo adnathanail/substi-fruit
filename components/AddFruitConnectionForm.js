@@ -1,4 +1,3 @@
-import AddForm from "@components/AddForm";
 import { useState } from "react";
 
 function AddFruitConnectionForm({
@@ -68,57 +67,60 @@ function AddFruitConnectionForm({
   };
 
   return (
-    <AddForm
-      form={
-        <div className="row">
-          <div className="col-6">
-            <div className="mb-3">
-              <input
-                type="text"
-                list="fruit1Options"
-                className="form-control"
-                id="fruit1"
-                placeholder="Enter fruit name"
-                onKeyPress={(event) => {
-                  if (event.key === "Enter") {
-                    addFruitConnection().then((_) => {});
-                  }
-                }}
-              />
-              <datalist id="fruit1Options">
-                {fruits.map((f) => (
-                  <option value={f.fruitName} key={f.fruitName} />
-                ))}
-              </datalist>
-            </div>
-          </div>
-          <div className="col-6">
-            <div className="mb-3">
-              <input
-                type="text"
-                list="fruit2Options"
-                className="form-control"
-                id="fruit2"
-                placeholder="Enter fruit name"
-                onKeyPress={(event) => {
-                  if (event.key === "Enter") {
-                    addFruitConnection().then((_) => {});
-                  }
-                }}
-              />
-              <datalist id="fruit2Options">
-                {fruits.map((f) => (
-                  <option value={f.fruitName} key={f.fruitName} />
-                ))}
-              </datalist>
-            </div>
-          </div>
+    <div className="row">
+      <div className="col-12 col-md-5">
+        <input
+          type="text"
+          list="fruit1Options"
+          className="form-control mb-3 mb-md-0"
+          id="fruit1"
+          placeholder="Enter fruit name"
+          onKeyPress={(event) => {
+            if (event.key === "Enter") {
+              addFruitConnection().then((_) => {});
+            }
+          }}
+        />
+        <datalist id="fruit1Options">
+          {fruits.map((f) => (
+            <option value={f.fruitName} key={f.fruitName} />
+          ))}
+        </datalist>
+      </div>
+      <div className="col-12 col-md-5">
+        <input
+          type="text"
+          list="fruit2Options"
+          className="form-control mb-3 mb-md-0"
+          id="fruit2"
+          placeholder="Enter fruit name"
+          onKeyPress={(event) => {
+            if (event.key === "Enter") {
+              addFruitConnection().then((_) => {});
+            }
+          }}
+        />
+        <datalist id="fruit2Options">
+          {fruits.map((f) => (
+            <option value={f.fruitName} key={f.fruitName} />
+          ))}
+        </datalist>
+      </div>
+      <div className="col-12 col-md-2">
+        <button
+          type="button"
+          className="btn btn-primary w-100"
+          onClick={addFruitConnection}
+        >
+          Add fruit connection
+        </button>
+      </div>
+      {errorText && (
+        <div className="col-12">
+          <div className="alert alert-warning mt-3 mb-0">{errorText}</div>
         </div>
-      }
-      addButtonText="Add fruit connection"
-      addButtonFunction={addFruitConnection}
-      errorText={errorText}
-    />
+      )}
+    </div>
   );
 }
 

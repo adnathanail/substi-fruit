@@ -1,7 +1,6 @@
-import AddForm from "@components/AddForm";
 import { useState } from "react";
 
-function AddFruitForm({ client, q, getFruits }) {
+function AddFruitForm({ client, q, fruits, getFruits }) {
   const [errorText, setErrorText] = useState("");
 
   const addFruit = async () => {
@@ -10,6 +9,11 @@ function AddFruitForm({ client, q, getFruits }) {
 
     if (fruitName === "") {
       setErrorText(`Fruit name is required`);
+      return;
+    }
+    const fruitNames = fruits.map((f) => f["fruitName"]);
+    if (fruitNames.includes(fruitName)) {
+      setErrorText(`'${fruitName}' already existst`);
       return;
     }
 
@@ -23,28 +27,35 @@ function AddFruitForm({ client, q, getFruits }) {
   };
 
   return (
-    <AddForm
-      form={
-        <div className="mb-3">
-          <label htmlFor="fruitName" className="form-label">
-            Fruit name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="fruitName"
-            onKeyPress={(event) => {
-              if (event.key === "Enter") {
-                addFruit().then((_) => {});
-              }
-            }}
-          />
+    <div className="row">
+      <div className="col-12 col-md-10">
+        <input
+          type="text"
+          className="form-control mb-3 mb-md-0"
+          id="fruitName"
+          placeholder="Add a fruit before creating a connection with it"
+          onKeyPress={(event) => {
+            if (event.key === "Enter") {
+              addFruit().then((_) => {});
+            }
+          }}
+        />
+      </div>
+      <div className="col-12 col-md-2">
+        <button
+          type="button"
+          className="btn btn-primary w-100"
+          onClick={addFruit}
+        >
+          Add fruit
+        </button>
+      </div>
+      {errorText && (
+        <div className="col-12">
+          <div className="alert alert-warning mt-3 mb-0">{errorText}</div>
         </div>
-      }
-      addButtonText="Add fruit"
-      addButtonFunction={addFruit}
-      errorText={errorText}
-    />
+      )}
+    </div>
   );
 }
 
