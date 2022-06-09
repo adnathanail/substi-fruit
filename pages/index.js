@@ -1,5 +1,5 @@
 import faunadb from "faunadb";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import RelationshipGraph from "@components/RelationshipGraph";
 
 // Instantiate a client
@@ -55,32 +55,28 @@ export default function Home() {
   };
 
   const addFruit = async () => {
-    const fruitName = document.querySelector('#fruitName').value;
+    const fruitName = document.querySelector("#fruitName").value;
 
-    document.querySelector('#fruitName').value = "";
+    document.querySelector("#fruitName").value = "";
 
     await client.query(
-      q.Create(
-          q.Collection("fruits"),
-          { data: {"fruitName": fruitName}}
-      )
-    )
+      q.Create(q.Collection("fruits"), { data: { fruitName: fruitName } })
+    );
     await getFruits();
   };
 
   const addFruitConnection = async () => {
-    const fruit1 = document.querySelector('#fruit1').value;
-    const fruit2 = document.querySelector('#fruit2').value;
+    const fruit1 = document.querySelector("#fruit1").value;
+    const fruit2 = document.querySelector("#fruit2").value;
 
-    document.querySelector('#fruit1').value = "";
-    document.querySelector('#fruit2').value = "";
+    document.querySelector("#fruit1").value = "";
+    document.querySelector("#fruit2").value = "";
 
     await client.query(
-      q.Create(
-          q.Collection("fruitConnections"),
-          { data: {"fruit1": fruit1, "fruit2": fruit2}}
-      )
-    )
+      q.Create(q.Collection("fruitConnections"), {
+        data: { fruit1: fruit1, fruit2: fruit2 },
+      })
+    );
     await getFruitConnections();
   };
 
@@ -97,14 +93,23 @@ export default function Home() {
         </ul>
         <hr />
         <div className="mb-3">
-          <label htmlFor="fruitName" className="form-label">Fruit name</label>
-          <input type="text" className="form-control" id="fruitName" onKeyPress={event => {
-            if (event.key === 'Enter') {
-                  addFruit().then(_ => {})
-                }
-          }} />
+          <label htmlFor="fruitName" className="form-label">
+            Fruit name
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="fruitName"
+            onKeyPress={(event) => {
+              if (event.key === "Enter") {
+                addFruit().then((_) => {});
+              }
+            }}
+          />
         </div>
-        <button type="button" className="btn btn-primary" onClick={addFruit}>Add fruit</button>
+        <button type="button" className="btn btn-primary" onClick={addFruit}>
+          Add fruit
+        </button>
       </div>
 
       <div className="card card-body mb-3">
@@ -112,29 +117,48 @@ export default function Home() {
         <hr />
         <ul className="mb-0">
           {fruitConnections.map((fruitConnection) => {
-            return <li key={fruitConnection["fruit1"] + fruitConnection["fruit2"]}>{fruitConnection["fruit1"]} to {fruitConnection["fruit2"]}</li>;
+            return (
+              <li key={fruitConnection["fruit1"] + fruitConnection["fruit2"]}>
+                {fruitConnection["fruit1"]} to {fruitConnection["fruit2"]}
+              </li>
+            );
           })}
         </ul>
         <hr />
         <div className="row">
           <div className="col-6">
             <div className="mb-3">
-              <label htmlFor="fruit1" className="form-label">Fruit 1</label>
+              <label htmlFor="fruit1" className="form-label">
+                Fruit 1
+              </label>
               <input type="text" className="form-control" id="fruit1" />
             </div>
           </div>
           <div className="col-6">
             <div className="mb-3">
-              <label htmlFor="fruit2" className="form-label">Fruit 2</label>
-              <input type="text" className="form-control" id="fruit2" onKeyPress={event => {
-                if (event.key === 'Enter') {
-                      addFruitConnection().then(_ => {})
-                    }
-              }} />
+              <label htmlFor="fruit2" className="form-label">
+                Fruit 2
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="fruit2"
+                onKeyPress={(event) => {
+                  if (event.key === "Enter") {
+                    addFruitConnection().then((_) => {});
+                  }
+                }}
+              />
             </div>
           </div>
         </div>
-        <button type="button" className="btn btn-primary" onClick={addFruitConnection}>Add fruit connection</button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={addFruitConnection}
+        >
+          Add fruit connection
+        </button>
       </div>
 
       {/*<Head>*/}
