@@ -13,7 +13,7 @@ function AddFruitForm({ client, q, fruits, getFruits }) {
     }
     const fruitNames = fruits.map((f) => f["fruitName"]);
     if (fruitNames.includes(fruitName)) {
-      setErrorText(`'${fruitName}' already existst`);
+      setErrorText(`'${fruitName}' already exists`);
       return;
     }
 
