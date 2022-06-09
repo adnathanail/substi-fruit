@@ -1,12 +1,6 @@
 import { useState } from "react";
 
-function AddFruitConnectionForm({
-  client,
-  q,
-  fruits,
-  fruitConnections,
-  getFruitConnections,
-}) {
+function AddFruitConnectionForm({ client, q, fruits, fruitConnections, getFruitConnections }) {
   const [errorText, setErrorText] = useState("");
 
   const addFruitConnection = async () => {
@@ -116,11 +110,7 @@ function AddFruitConnectionForm({
         </datalist>
       </div>
       <div className="col-12 col-md-2">
-        <button
-          type="button"
-          className="btn btn-primary w-100"
-          onClick={addFruitConnection}
-        >
+        <button type="button" className="btn btn-primary w-100" onClick={addFruitConnection}>
           Add fruit connection
         </button>
       </div>

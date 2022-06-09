@@ -53,14 +53,7 @@ function RelationshipGraph({ fruits, fruitConnections }) {
 
   const { graph, events } = state;
 
-  return (
-    <Graph
-      graph={graph}
-      options={options}
-      events={events}
-      style={{ height: "600px", backgroundColor: "rgb(248, 249, 250)" }}
-    />
-  );
+  return <Graph graph={graph} options={options} events={events} style={{ height: "600px", backgroundColor: "rgb(248, 249, 250)" }} />;
 }
 
 export default RelationshipGraph;

@@ -20,9 +20,7 @@ function AddFruitForm({ client, q, fruits, getFruits }) {
     document.querySelector("#fruitName").value = "";
     setErrorText("");
 
-    await client.query(
-      q.Create(q.Collection("fruits"), { data: { fruitName: fruitName } })
-    );
+    await client.query(q.Create(q.Collection("fruits"), { data: { fruitName: fruitName } }));
     await getFruits();
   };
 
@@ -42,11 +40,7 @@ function AddFruitForm({ client, q, fruits, getFruits }) {
         />
       </div>
       <div className="col-12 col-md-2">
-        <button
-          type="button"
-          className="btn btn-primary w-100"
-          onClick={addFruit}
-        >
+        <button type="button" className="btn btn-primary w-100" onClick={addFruit}>
           Add fruit
         </button>
       </div>

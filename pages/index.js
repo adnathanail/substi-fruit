@@ -41,9 +41,7 @@ export default function Home() {
   };
 
   const getFruitConnections = async () => {
-    let connections = await client.query(
-      q.Get(q.Ref(q.Collection("fruitConnections"), "333956009436381383"))
-    );
+    let connections = await client.query(q.Get(q.Ref(q.Collection("fruitConnections"), "333956009436381383")));
     if ("data" in connections) {
       setFruitConnections(connections["data"]);
     } else {
@@ -53,14 +51,7 @@ export default function Home() {
 
   return (
     <div className="container mt-4" id="main">
-      <HeaderSection
-        client={client}
-        q={q}
-        fruits={fruits}
-        getFruits={getFruits}
-        fruitConnections={fruitConnections}
-        getFruitConnections={getFruitConnections}
-      />
+      <HeaderSection client={client} q={q} fruits={fruits} getFruits={getFruits} fruitConnections={fruitConnections} getFruitConnections={getFruitConnections} />
 
       <RelationshipGraph fruits={fruits} fruitConnections={fruitConnections} />
       <StatsCard fruits={fruits} fruitConnections={fruitConnections} />

@@ -4,10 +4,8 @@ const reduceSum = (partialSum, a) => partialSum + a;
 
 function StatsCard({ fruits, fruitConnections }) {
   const [numConnections, setnumConnections] = useState(0);
-  const [fruitMostUniqueConnections, setFruitMostUniqueConnections] =
-    useState("");
-  const [fruitMostTotalConnections, setFruitMostTotalConnections] =
-    useState("");
+  const [fruitMostUniqueConnections, setFruitMostUniqueConnections] = useState("");
+  const [fruitMostTotalConnections, setFruitMostTotalConnections] = useState("");
 
   useEffect(() => {
     // Count the number of connections in the graph
@@ -44,28 +42,14 @@ function StatsCard({ fruits, fruitConnections }) {
         total_connections[toFruit] += tally;
       }
     }
-    let most_unique_fc = Object.entries(unique_connections).reduce(
-      (currentWinner, a) => (currentWinner[1] > a[1] ? currentWinner : a),
-      ["", 0]
-    );
+    let most_unique_fc = Object.entries(unique_connections).reduce((currentWinner, a) => (currentWinner[1] > a[1] ? currentWinner : a), ["", 0]);
 
     if (most_unique_fc[0].length > 0) {
-      setFruitMostUniqueConnections(
-        `${most_unique_fc[0][0].toUpperCase()}${most_unique_fc[0].slice(1)} (${
-          most_unique_fc[1]
-        })`
-      );
+      setFruitMostUniqueConnections(`${most_unique_fc[0][0].toUpperCase()}${most_unique_fc[0].slice(1)} (${most_unique_fc[1]})`);
     }
-    let most_total_fc = Object.entries(total_connections).reduce(
-      (currentWinner, a) => (currentWinner[1] > a[1] ? currentWinner : a),
-      ["", 0]
-    );
+    let most_total_fc = Object.entries(total_connections).reduce((currentWinner, a) => (currentWinner[1] > a[1] ? currentWinner : a), ["", 0]);
     if (most_total_fc[0].length > 0) {
-      setFruitMostTotalConnections(
-        `${most_total_fc[0][0].toUpperCase()}${most_total_fc[0].slice(1)} (${
-          most_total_fc[1]
-        })`
-      );
+      setFruitMostTotalConnections(`${most_total_fc[0][0].toUpperCase()}${most_total_fc[0].slice(1)} (${most_total_fc[1]})`);
     }
   }, [fruits, fruitConnections]);
 
