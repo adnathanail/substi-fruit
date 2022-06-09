@@ -1,6 +1,6 @@
 import faunadb from "faunadb";
-import {useEffect, useRef, useState} from "react";
-import BarChart from "@components/BarChart";
+import {useEffect, useState} from "react";
+import RelationshipGraph from "@components/RelationshipGraph";
 
 // Instantiate a client
 const q = faunadb.query;
@@ -86,7 +86,7 @@ export default function Home() {
 
   return (
     <div className="container mt-4">
-      <BarChart fruits={fruits} fruitConnections={fruitConnections} />
+      <RelationshipGraph fruits={fruits} fruitConnections={fruitConnections} />
       <div className="card card-body mb-3">
         <h3>Fruit</h3>
         <hr />
