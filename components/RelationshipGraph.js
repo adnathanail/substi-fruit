@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import Graph from "react-graph-vis";
 
 const options = {
@@ -34,6 +34,8 @@ function RelationshipGraph({ fruits, fruitConnections }) {
         return {
           from: fruitNames.indexOf(fc["fruit1"]),
           to: fruitNames.indexOf(fc["fruit2"]),
+          // width: 3,
+          // label: "3",
         };
       });
 
