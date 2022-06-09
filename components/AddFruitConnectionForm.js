@@ -24,7 +24,6 @@ function AddFruitForm({ client, q, fruits, getFruitConnections }) {
 
   return (
     <AddForm
-      title="Fruit connections"
       form={
         <div className="row">
           <div className="col-6">

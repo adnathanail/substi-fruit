@@ -14,7 +14,6 @@ function AddFruitForm({ client, q, getFruits }) {
 
   return (
     <AddForm
-      title="Fruit"
       form={
         <div className="mb-3">
           <label htmlFor="fruitName" className="form-label">
