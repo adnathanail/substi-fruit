@@ -1,8 +1,8 @@
 import faunadb from "faunadb";
 import { useEffect, useState } from "react";
 import RelationshipGraph from "@components/RelationshipGraph";
-import AddFruitForm from "@components/AddFruitForm";
-import AddFruitConnectionForm from "@components/AddFruitConnectionForm";
+import StatsCard from "@components/StatsCard";
+import { HeaderSection } from "@components/HeaderSection";
 
 // Instantiate a client
 const q = faunadb.query;
@@ -53,31 +53,17 @@ export default function Home() {
 
   return (
     <div className="container mt-4" id="main">
-      <h1>Substi-fruit</h1>
-      <p>
-        I saw a TikTok that pointed out that if you asked someone for a
-        strawberry they could reasonable offer a raspberry but not a kiwi;
-        apple, pear, not pineapple; etc.
-      </p>
-      <p>I am curious which fruit substitutions people find acceptable</p>
-      <div className="card card-body">
-        <AddFruitForm
-          client={client}
-          q={q}
-          fruits={fruits}
-          getFruits={getFruits}
-        />
-        <hr />
-        <AddFruitConnectionForm
-          client={client}
-          q={q}
-          fruits={fruits}
-          fruitConnections={fruitConnections}
-          getFruitConnections={getFruitConnections}
-        />
-      </div>
+      <HeaderSection
+        client={client}
+        q={q}
+        fruits={fruits}
+        getFruits={getFruits}
+        fruitConnections={fruitConnections}
+        getFruitConnections={getFruitConnections}
+      />
 
       <RelationshipGraph fruits={fruits} fruitConnections={fruitConnections} />
+      <StatsCard fruits={fruits} fruitConnections={fruitConnections} />
     </div>
   );
 }

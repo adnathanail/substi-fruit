@@ -55,7 +55,7 @@ function AddFruitConnectionForm({
 
     // Refresh latest fruit connections
     await getFruitConnections();
-    let newFruitConnections = {...fruitConnections};
+    let newFruitConnections = { ...fruitConnections };
     // Add empty dict if this fruit has never connected before
     if (!(fromFruit in newFruitConnections)) {
       newFruitConnections[fromFruit] = {};
