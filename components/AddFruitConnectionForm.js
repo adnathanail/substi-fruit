@@ -1,7 +1,13 @@
 import AddForm from "@components/AddForm";
 import { useState } from "react";
 
-function AddFruitConnectionForm({ client, q, fruits, getFruitConnections }) {
+function AddFruitConnectionForm({
+  client,
+  q,
+  fruits,
+  fruitConnections,
+  getFruitConnections,
+}) {
   const [errorText, setErrorText] = useState("");
 
   const addFruitConnection = async () => {
@@ -32,9 +38,28 @@ function AddFruitConnectionForm({ client, q, fruits, getFruitConnections }) {
     document.querySelector("#fruit2").value = "";
     setErrorText("");
 
+    let fromFruit, toFruit;
+    if (fruit1 < fruit2) {
+      fromFruit = fruit1;
+      toFruit = fruit2;
+    } else {
+      toFruit = fruit1;
+      fromFruit = fruit2;
+    }
+
+    let newFruitConnections = { ...fruitConnections };
+    if (!(fromFruit in newFruitConnections)) {
+      newFruitConnections[fromFruit] = {};
+    }
+    if (!(toFruit in newFruitConnections[fromFruit])) {
+      newFruitConnections[fromFruit][toFruit] = 0;
+    }
+
+    newFruitConnections[fromFruit][toFruit] += 1;
+
     await client.query(
-      q.Create(q.Collection("fruitConnections"), {
-        data: { fruit1: fruit1, fruit2: fruit2 },
+      q.Update(q.Ref(q.Collection("fruitConnections"), "333954507941609671"), {
+        data: newFruitConnections,
       })
     );
     await getFruitConnections();

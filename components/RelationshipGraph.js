@@ -24,21 +24,18 @@ function RelationshipGraph({ fruits, fruitConnections }) {
     let nodes = fruitNames.map((f, index) => {
       return { id: index, label: f, color: "#fff" };
     });
-    let edges = fruitConnections
-      .filter((fc) => {
-        return (
-          fruitNames.includes(fc["fruit1"]) && fruitNames.includes(fc["fruit2"])
-        );
-      })
-      .map((fc) => {
-        return {
-          from: fruitNames.indexOf(fc["fruit1"]),
-          to: fruitNames.indexOf(fc["fruit2"]),
-          // width: 3,
-          // label: "3",
-        };
-      });
 
+    let edges = [];
+    for (const [fromFruit, connections] of Object.entries(fruitConnections)) {
+      for (const [toFruit, tally] of Object.entries(connections)) {
+        edges.push({
+          from: fruitNames.indexOf(fromFruit),
+          to: fruitNames.indexOf(toFruit),
+          width: tally,
+          label: tally.toString(),
+        });
+      }
+    }
     setState({
       counter: nodes.length,
       graph: { nodes, edges },

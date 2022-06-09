@@ -14,17 +14,15 @@ const client = new faunadb.Client({
 });
 
 export default function Home() {
+  const [initialLoaded, setInitialLoaded] = useState(false);
   const [fruits, setFruits] = useState([]);
-  const [fruitConnections, setFruitConnections] = useState([]);
+  const [fruitConnections, setFruitConnections] = useState({});
 
   useEffect(() => {
-    // You need to restrict it at some point
-    // This is just dummy code and should be replaced by actual
-    if (fruits.length === 0) {
+    if (!initialLoaded) {
       getFruits().then((_) => {});
-    }
-    if (fruitConnections.length === 0) {
       getFruitConnections().then((_) => {});
+      setInitialLoaded(true);
     }
   }, []);
 
@@ -43,29 +41,23 @@ export default function Home() {
   };
 
   const getFruitConnections = async () => {
-    // Get all fruits
-    client
-      .query(
-        q.Map(
-          q.Paginate(q.Documents(q.Collection("fruitConnections"))),
-          q.Lambda((x) => q.Get(x))
-        )
-      )
-      .then((res) => {
-        setFruitConnections(res["data"].map((fc) => fc["data"]));
-      });
+    let connections = await client.query(
+      q.Get(q.Ref(q.Collection("fruitConnections"), "333954507941609671"))
+    );
+    setFruitConnections(connections["data"]);
   };
 
   return (
     <div className="container mt-4" id="main">
-      <RelationshipGraph fruits={fruits} fruitConnections={fruitConnections} />
-      <AddFruitForm client={client} q={q} getFruits={getFruits} />
       <AddFruitConnectionForm
         client={client}
         q={q}
         fruits={fruits}
+        fruitConnections={fruitConnections}
         getFruitConnections={getFruitConnections}
       />
+      <RelationshipGraph fruits={fruits} fruitConnections={fruitConnections} />
+      <AddFruitForm client={client} q={q} getFruits={getFruits} />
     </div>
   );
 }
