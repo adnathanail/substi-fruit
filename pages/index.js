@@ -1,9 +1,6 @@
-import Head from "next/head";
-import Header from "@components/Header";
-import Footer from "@components/Footer";
-import FeedbackForm from "@components/FeedbackForm";
 import faunadb from "faunadb";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
+import BarChart from "@components/BarChart";
 
 // Instantiate a client
 const q = faunadb.query;
@@ -57,7 +54,7 @@ export default function Home() {
       });
   };
 
-  async function addFruit() {
+  const addFruit = async () => {
     const fruitName = document.querySelector('#fruitName').value;
 
     document.querySelector('#fruitName').value = "";
@@ -69,9 +66,9 @@ export default function Home() {
       )
     )
     await getFruits();
-  }
+  };
 
-  async function addFruitConnection() {
+  const addFruitConnection = async () => {
     const fruit1 = document.querySelector('#fruit1').value;
     const fruit2 = document.querySelector('#fruit2').value;
 
@@ -85,10 +82,15 @@ export default function Home() {
       )
     )
     await getFruitConnections();
-  }
+  };
 
   return (
     <div className="container mt-4">
+      <BarChart data={fruits.map((_, index) => {
+        return {
+          year: 2016 + index, efficiency: 37.7, sales: 6873000
+        }
+      })} />
       <div className="card card-body mb-3">
         <h3>Fruit</h3>
         <hr />
