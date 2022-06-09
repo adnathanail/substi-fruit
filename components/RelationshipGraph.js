@@ -7,6 +7,11 @@ const options = {
   },
   edges: {
     color: "#000000",
+    arrows: {
+      to: {
+        enabled: false,
+      },
+    },
   },
 };
 
@@ -22,7 +27,11 @@ function RelationshipGraph({ fruits, fruitConnections }) {
   useEffect(() => {
     const fruitNames = fruits.map((f) => f["fruitName"]);
     let nodes = fruitNames.map((f, index) => {
-      return { id: index, label: f, color: "#fff" };
+      return {
+        id: index,
+        label: f[0].toUpperCase() + f.slice(1),
+        color: "#fff",
+      };
     });
 
     let edges = [];

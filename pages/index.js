@@ -42,9 +42,13 @@ export default function Home() {
 
   const getFruitConnections = async () => {
     let connections = await client.query(
-      q.Get(q.Ref(q.Collection("fruitConnections"), "333954507941609671"))
+      q.Get(q.Ref(q.Collection("fruitConnections"), "333956009436381383"))
     );
-    setFruitConnections(connections["data"]);
+    if ("data" in connections) {
+      setFruitConnections(connections["data"]);
+    } else {
+      setFruitConnections({});
+    }
   };
 
   return (

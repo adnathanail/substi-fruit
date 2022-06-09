@@ -5,7 +5,8 @@ function AddFruitForm({ client, q, getFruits }) {
   const [errorText, setErrorText] = useState("");
 
   const addFruit = async () => {
-    const fruitName = document.querySelector("#fruitName").value;
+    let fruitName = document.querySelector("#fruitName").value;
+    fruitName = fruitName.toLowerCase().replaceAll(" ", "");
 
     if (fruitName === "") {
       setErrorText(`Fruit name is required`);

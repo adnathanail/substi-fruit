@@ -11,8 +11,10 @@ function AddFruitConnectionForm({
   const [errorText, setErrorText] = useState("");
 
   const addFruitConnection = async () => {
-    const fruit1 = document.querySelector("#fruit1").value;
-    const fruit2 = document.querySelector("#fruit2").value;
+    let fruit1 = document.querySelector("#fruit1").value;
+    fruit1 = fruit1.toLowerCase().replaceAll(" ", "");
+    let fruit2 = document.querySelector("#fruit2").value;
+    fruit2 = fruit2.toLowerCase().replaceAll(" ", "");
 
     if (fruit1 === "") {
       setErrorText(`Fruit 1 is required`);
@@ -58,7 +60,7 @@ function AddFruitConnectionForm({
     newFruitConnections[fromFruit][toFruit] += 1;
 
     await client.query(
-      q.Update(q.Ref(q.Collection("fruitConnections"), "333954507941609671"), {
+      q.Update(q.Ref(q.Collection("fruitConnections"), "333956009436381383"), {
         data: newFruitConnections,
       })
     );
@@ -79,6 +81,11 @@ function AddFruitConnectionForm({
                 list="fruit1Options"
                 className="form-control"
                 id="fruit1"
+                onKeyPress={(event) => {
+                  if (event.key === "Enter") {
+                    addFruitConnection().then((_) => {});
+                  }
+                }}
               />
               <datalist id="fruit1Options">
                 {fruits.map((f) => (
