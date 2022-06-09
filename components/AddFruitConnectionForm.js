@@ -24,6 +24,11 @@ function AddFruitConnectionForm({
       return;
     }
 
+    if (fruit1 === fruit2) {
+      setErrorText(`You cannot link a fruit to itself`);
+      return;
+    }
+
     const fruitNames = fruits.map((f) => f["fruitName"]);
 
     if (!fruitNames.includes(fruit1)) {
@@ -48,10 +53,14 @@ function AddFruitConnectionForm({
       fromFruit = fruit2;
     }
 
-    let newFruitConnections = { ...fruitConnections };
+    // Refresh latest fruit connections
+    await getFruitConnections();
+    let newFruitConnections = {...fruitConnections};
+    // Add empty dict if this fruit has never connected before
     if (!(fromFruit in newFruitConnections)) {
       newFruitConnections[fromFruit] = {};
     }
+    // Add zeroed link if these fruits have never connected before
     if (!(toFruit in newFruitConnections[fromFruit])) {
       newFruitConnections[fromFruit][toFruit] = 0;
     }
