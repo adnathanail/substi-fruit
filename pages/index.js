@@ -72,6 +72,12 @@ export default function Home() {
     document.querySelector("#fruit1").value = "";
     document.querySelector("#fruit2").value = "";
 
+    const fruitNames = fruits.map((f) => f["fruitName"]);
+
+    if (!fruitNames.includes(fruit1) || !fruitNames.includes(fruit2)) {
+      return;
+    }
+
     await client.query(
       q.Create(q.Collection("fruitConnections"), {
         data: { fruit1: fruit1, fruit2: fruit2 },
@@ -81,7 +87,7 @@ export default function Home() {
   };
 
   return (
-    <div className="container mt-4">
+    <div className="container mt-4" id="main">
       <RelationshipGraph fruits={fruits} fruitConnections={fruitConnections} />
       <div className="card card-body mb-3">
         <h3>Fruit</h3>
@@ -131,7 +137,10 @@ export default function Home() {
               <label htmlFor="fruit1" className="form-label">
                 Fruit 1
               </label>
-              <input type="text" className="form-control" id="fruit1" />
+              <input type="text" list="fruit1Options" className="form-control" id="fruit1" />
+              <datalist id="fruit1Options">
+                {fruits.map(f => <option value={f.fruitName} key={f.fruitName}></option>)}
+              </datalist>
             </div>
           </div>
           <div className="col-6">
@@ -141,6 +150,7 @@ export default function Home() {
               </label>
               <input
                 type="text"
+                list="fruit2Options"
                 className="form-control"
                 id="fruit2"
                 onKeyPress={(event) => {
@@ -149,6 +159,9 @@ export default function Home() {
                   }
                 }}
               />
+              <datalist id="fruit2Options">
+                {fruits.map(f => <option value={f.fruitName} key={f.fruitName}></option>)}
+              </datalist>
             </div>
           </div>
         </div>
@@ -160,26 +173,6 @@ export default function Home() {
           Add fruit connection
         </button>
       </div>
-
-      {/*<Head>*/}
-      {/*  <title>Next.js Toolbox</title>*/}
-      {/*  <link rel="icon" href="/favicon.ico" />*/}
-      {/*</Head>*/}
-
-      {/*<main>*/}
-      {/*  <Header title="Next.js Toolbox" />*/}
-      {/*  <hr />*/}
-      {/*  {fruitConnections.map((fruitConnection) => {*/}
-      {/*    return fruitConnection["fruit1"] + fruitConnection["fruit2"];*/}
-      {/*  })}*/}
-      {/*  <p className="description">*/}
-      {/*    Here's an example of a Netlify Form! When you fill this out, the*/}
-      {/*    submissions can be found in the Netlify Admin site.*/}
-      {/*  </p>*/}
-      {/*  <FeedbackForm />*/}
-      {/*  /!*<JokeBlock />*!/*/}
-      {/*</main>*/}
-      {/*<Footer />*/}
     </div>
   );
 }
