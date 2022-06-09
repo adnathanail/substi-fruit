@@ -6,6 +6,7 @@
   "bugs": {
     "url": "https://github.com/adnathanail/substi-fruit/issues"
   },
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
