@@ -1,10 +1,19 @@
 import AddForm from "@components/AddForm";
+import { useState } from "react";
 
 function AddFruitForm({ client, q, getFruits }) {
+  const [errorText, setErrorText] = useState("");
+
   const addFruit = async () => {
     const fruitName = document.querySelector("#fruitName").value;
 
+    if (fruitName === "") {
+      setErrorText(`Fruit name is required`);
+      return;
+    }
+
     document.querySelector("#fruitName").value = "";
+    setErrorText("");
 
     await client.query(
       q.Create(q.Collection("fruits"), { data: { fruitName: fruitName } })
@@ -33,6 +42,7 @@ function AddFruitForm({ client, q, getFruits }) {
       }
       addButtonText="Add fruit"
       addButtonFunction={addFruit}
+      errorText={errorText}
     />
   );
 }

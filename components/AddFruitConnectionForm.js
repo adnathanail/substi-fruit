@@ -1,18 +1,36 @@
 import AddForm from "@components/AddForm";
+import { useState } from "react";
 
-function AddFruitForm({ client, q, fruits, getFruitConnections }) {
+function AddFruitConnectionForm({ client, q, fruits, getFruitConnections }) {
+  const [errorText, setErrorText] = useState("");
+
   const addFruitConnection = async () => {
     const fruit1 = document.querySelector("#fruit1").value;
     const fruit2 = document.querySelector("#fruit2").value;
 
-    document.querySelector("#fruit1").value = "";
-    document.querySelector("#fruit2").value = "";
+    if (fruit1 === "") {
+      setErrorText(`Fruit 1 is required`);
+      return;
+    }
+    if (fruit2 === "") {
+      setErrorText(`Fruit 2 is required`);
+      return;
+    }
 
     const fruitNames = fruits.map((f) => f["fruitName"]);
 
-    if (!fruitNames.includes(fruit1) || !fruitNames.includes(fruit2)) {
+    if (!fruitNames.includes(fruit1)) {
+      setErrorText(`Fruit with name '${fruit1}' does not exist`);
       return;
     }
+    if (!fruitNames.includes(fruit2)) {
+      setErrorText(`Fruit with name '${fruit2}' does not exist`);
+      return;
+    }
+
+    document.querySelector("#fruit1").value = "";
+    document.querySelector("#fruit2").value = "";
+    setErrorText("");
 
     await client.query(
       q.Create(q.Collection("fruitConnections"), {
@@ -71,8 +89,9 @@ function AddFruitForm({ client, q, fruits, getFruitConnections }) {
       }
       addButtonText="Add fruit connection"
       addButtonFunction={addFruitConnection}
+      errorText={errorText}
     />
   );
 }
 
-export default AddFruitForm;
+export default AddFruitConnectionForm;

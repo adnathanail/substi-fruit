@@ -1,4 +1,4 @@
-function AddForm({ title, form, addButtonText, addButtonFunction }) {
+function AddForm({ title, form, addButtonText, addButtonFunction, errorText }) {
   return (
     <div className="card card-body mb-3">
       {form}
@@ -9,6 +9,9 @@ function AddForm({ title, form, addButtonText, addButtonFunction }) {
       >
         {addButtonText}
       </button>
+      {errorText && (
+        <div className="alert alert-warning mt-3 mb-0">{errorText}</div>
+      )}
     </div>
   );
 }
