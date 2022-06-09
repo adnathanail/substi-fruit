@@ -2,7 +2,7 @@
 
 ![next-on-netlify](https://user-images.githubusercontent.com/3611928/156433088-21a7cdf6-760c-4758-a3b7-9073bac5e452.png)
 
-This is a [Next.js](https://nextjs.org/) v12 project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). It is a reference on how to integrate commonly used features within Netlify for Next.js. 
+This is a [Next.js](https://nextjs.org/) v12 project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). It is a reference on how to integrate commonly used features within Netlify for Next.js.
 
 ## Getting Started
 
@@ -27,10 +27,11 @@ Want to deploy immediately? Click this button
 Clicking this button will create a new repo for you that looks exactly like this one, and sets that repo up immediately for deployment on Netlify.
 
 ### Deploy using the [Netlify CLI](https://cli.netlify.com/):
+
 Click the 'Use the Template' button at the top of this repo or clone it with the `git clone` command. Then install the Netlify CLI tool and run `netlify init`. Or straight from the Netlify CLI, use the `netlify sites:create-template` command in you terminal ([learn more about this command here](https://www.netlify.com/blog/create-a-site-from-a-template-using-the-netlify-cli)) to do the entire flow for you.
 
 ```bash
-git clone https://github.com/netlify-templates/nextjs-toolbox 
+git clone https://github.com/netlify-templates/nextjs-toolbox
 
 npm install netlify-cli -g # to install the Netlify CLI tool globally
 
@@ -99,7 +100,12 @@ communicate that this is a field not meant to be filled in.
 For this to work we also need to add a `data-netlify-honeypot` attribute to the form element.
 
 ```html
-<form data-netlify="true" data-netlify-honeypot="bot-field" action="/success" method="POST"></form>
+<form
+  data-netlify="true"
+  data-netlify-honeypot="bot-field"
+  action="/success"
+  method="POST"
+></form>
 ```
 
 [See it here in the template code.](https://github.com/netlify-templates/next-toolbox/blob/main/components/FeedbackForm.js#L8)
@@ -132,12 +138,12 @@ There is quite a bit you can do with these functions, so here are some additiona
 
 ## Redirects
 
-In the [`netlify.toml`](./netlify.toml) configuration file there is an example of how to implement redirects. Redirects can be used to do many things from redirecting Single Page Apps more predictably, redirecting based on country/language to leveraging On-Demand Builders for [Distributed Persistant Rendering](https://www.netlify.com/blog/2021/04/14/distributed-persistent-rendering-a-new-jamstack-approach-for-faster-builds/). 
+In the [`netlify.toml`](./netlify.toml) configuration file there is an example of how to implement redirects. Redirects can be used to do many things from redirecting Single Page Apps more predictably, redirecting based on country/language to leveraging On-Demand Builders for [Distributed Persistant Rendering](https://www.netlify.com/blog/2021/04/14/distributed-persistent-rendering-a-new-jamstack-approach-for-faster-builds/).
 
-In the example we'll be using redirects to have a shorter endpoint to Netlify functions. By default, you call a Netlify function when requesting a path like `https://yoursite.netlify.com/.netlify/functions/functionName`. Instead, we'll redirect all calls from a path including `/api` to call on the Netlify functions. So the path will be `https://yoursite.netlify.com/api/functionName`, a lot easier to remember too. 
-
+In the example we'll be using redirects to have a shorter endpoint to Netlify functions. By default, you call a Netlify function when requesting a path like `https://yoursite.netlify.com/.netlify/functions/functionName`. Instead, we'll redirect all calls from a path including `/api` to call on the Netlify functions. So the path will be `https://yoursite.netlify.com/api/functionName`, a lot easier to remember too.
 
 ### Example
+
 ```toml
 [[redirects]]
 from = "/api/*"
