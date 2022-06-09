@@ -31,7 +31,7 @@ export default function Home() {
     client
       .query(
         q.Map(
-          q.Paginate(q.Documents(q.Collection("fruits1"))),
+          q.Paginate(q.Documents(q.Collection("fruits"))),
           q.Lambda((x) => q.Get(x))
         )
       )
@@ -61,7 +61,7 @@ export default function Home() {
 
     await client.query(
       q.Create(
-          q.Collection("fruits1"),
+          q.Collection("fruits"),
           { data: {"fruitName": fruitName}}
       )
     )
