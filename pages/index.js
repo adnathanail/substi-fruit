@@ -86,11 +86,7 @@ export default function Home() {
 
   return (
     <div className="container mt-4">
-      <BarChart data={fruits.map((_, index) => {
-        return {
-          year: 2016 + index, efficiency: 37.7, sales: 6873000
-        }
-      })} />
+      <BarChart fruits={fruits} fruitConnections={fruitConnections} />
       <div className="card card-body mb-3">
         <h3>Fruit</h3>
         <hr />
